@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import {Grid, TextField, Typography}  from '@material-ui/core';
 import { API_KEY, URL } from './data/contants';
+import WeatherPage from './containers/WeatherPage';
 import './App.css';
 
 const useStyles = makeStyles((theme: Theme) => 
@@ -38,6 +39,7 @@ function App() {
   useEffect(() => {
     ref.current?.focus();
   }, [])
+
   useEffect(() => {
     const MAIN_URL: string = URL+city+API_KEY;
     console.log(MAIN_URL)
@@ -47,6 +49,7 @@ function App() {
       .catch(err => console.error(err))
   }, [city])
 
+  console.log(details)
   return (
     <div className="App">
       <Grid container spacing={1}>
@@ -57,6 +60,7 @@ function App() {
           <TextField fullWidth label="City" inputRef={ref} value={city} onChange={onChangeCity} placeholder="Check your city"/>
         </Grid>
       </Grid>
+      <WeatherPage data={details} />
     </div>
   );
 }
